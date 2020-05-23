@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"> 
+    <link rel="stylesheet" href="css/css.css">
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div class="container " >
+    <div class="body">
+        <div class="title">
+            <span>自动化测试小工具</span>
+        </div>
+        <div class="row center-block ">
+            <div class="container-input col-md-5">
+                <div class="input_title">
+                    <div class="row">
+                        <span class="col-md-12 input_title_style">因素名和水平数</span>
+                        <!-- <span class="col-lg-12 text-center">what???</span> -->
+                        <button type="button" class="btn btn-sm btn-success" data-toggle="popover" title="因素和水平数" data-html="true" data-content="因素（Factor）：凡欲考察的变量称为因素（变量）;<br/><br/>
+                        水平数（Level）：因素被考察的值称为水平（变量的取值）;">what???</button>
+                        <button type="button" class="btn btn-sm btn-success" data-toggle="popover" title="输入要求" data-html="true" data-content="变量名与变量取值之间以冒号（英文）分隔。<br/><br/>
+                        每个取值之间以逗号（英文）分隔。">输入小提示</button>
+                    </div>
+                </div>
+                <div class="container-input-top text-center">
+                    <span>因素一</span><input type="text" name="test1" id="test1" placeholder="操作系统:linux,XP,window10"><br/>
+                    <span>因素二</span><input type="text" name="test2" id="test2" placeholder="浏览器:IE6.0,IE7.0,TT"><br/>
+                    <span>因素三</span><input type="text" name="test3" id="test3" placeholder="杀毒软件:卡巴,金山,诺顿"><br/>
+                    <span>因素四</span><input type="text" name="test4" id="test4" placeholder="应用软件:QQ,微信,爱奇艺"><br/>
+                    <div class="container-input-bottom">
+                        <div class="row">
+                            <input type="button" value="重置" id="reset" class="btn btn-success " onclick="resets()">
+                            <input type="button" value="开始生成" id="start" class="btn btn-success ">
+                            <!-- <button type="button" class="btn btn-sm btn-success col-md-4 alert_size" data-toggle="popover" data-html="true" title="测试用例" data-content="操作系统:2000,XP,2003<br>浏览器:IE6.0,IE7.0,TT<br>杀毒软件:卡巴,金山,诺顿<br>应用软件:QQ,微信,爱奇艺">快速测试(双击关闭)</button> -->
+                            <input type="button" value="快速输入" id="test_now" class="btn btn-success " onclick="clicks()">
+                                               
+                        </div>
+                    </div>
+                    </div>
+           
+                </div>
+                <div class="container-show col-md-6 col-md-offset-1">
+                    <div class="show_title">
+                        <span>测试用例表</span>
+                        
+                        
+                    </div>
+                   <div class="excel">
+                    <a>导出表格</a>
+                   </div>
+                    <div class="text-show">
+                        
+                        <p id="show_result" class="shows_result">
+                            
+                        </p>
+                        
+                    </div>
+                </div>
+         </div>
+    </div>
+    </div>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/javascript.js"></script>
+    <script>
+        var resets=function(){
+            $("#test1").prop("value","");
+            $("#test2").prop("value","");
+            $("#test3").prop("value","");
+            $("#test4").prop("value","");
+        }
+       var clicks=function(){
+           $("#test1").prop("value","操作系统:linux,XP,window10");
+           $("#test2").prop("value","浏览器:IE6.0,IE7.0,TT");
+           $("#test3").prop("value","杀毒软件:卡巴,金山,诺顿");
+           $("#test4").prop("value","应用软件:QQ,微信,爱奇艺");
+       }
+    </script>
+    <script>
+        // 初始化按键
+        $(function () {
+             $('[data-toggle="popover"]').popover()
+        });
+      
+    </script>
+    <script>
+    // 使用outerHTML属性获取整个table元素的HTML代码（包括<table>标签），然后包装成一个完整的HTML文档，设置charset为urf-8以防止中文乱码
+    var html = "<html><head><meta charset='utf-8' /></head><body>" + document.getElementsByTagName("table")[0].outerHTML + "</body></html>";
+    // 实例化一个Blob对象，其构造函数的第一个参数是包含文件内容的数组，第二个参数是包含文件类型属性的对象
+    var blob = new Blob([html], { type: "application/vnd.ms-excel" });
+    var a = document.getElementsByTagName("a")[0];
+    // 利用URL.createObjectURL()方法为a元素生成blob URL
+    a.href = URL.createObjectURL(blob);
+    // 设置文件名
+    a.download = "学生成绩表.xls";
+    </script>
+</body>
+</html>
